@@ -1,0 +1,141 @@
+import java.util.Scanner;
+
+public class  KEFEC {
+    Scanner wali = new Scanner(System.in);
+    public String opcion;
+    private String nombre, apellido, dni;
+    public double totalAcumulado = 0.0;
+
+    String[][] mega_regulares = {
+            {"MEGA MIX - 8 PIEZAS", "69.90"}, {"SUPER MEGA - 10 PIEZAS", "79.90"},
+            {"MEGA FULL - 12 PIEZAS", "89.90"}, {"MEGA GIGANTE - 14 PIEZAS", "99.90"},
+    };
+    String[][] menu_sandwich = {
+            {"COMBO TWISTER TRADICIONAL", "24.90"}, {"COMBO TWISTER AMERICANO", "25.90"},
+            {"TOASTED TWISTER TRADICIONAL", "18.90"}, {"TOASTED TWISTER AMERICANO", "19.90"},
+            {"COMBO KENTUCKY CHICKEN SANDWICH", "25.90"}, {"KENTUCKY CHICKEN SANDWICH", "19.90"}
+    };
+    String[][] combos = {
+            {"COMBO CLÁSICO", "20.90"}, {"COMBO SNACKS", "24.90"},
+            {"COMBO 8 HOT WINGS", "24.90"}, {"COMBO 8 NUGGETS", "24.90"},
+    };
+    String[][] bigbox = {
+            {"BIG BOX KRUNCHY", "26.90"}, {"BIG BOX KENTUNCKY CHIKEN SANDWINCH DELUXE", "32.90"},
+            {"BIG BOX POPCORN", "33.90"}, {"BIG BOX WOW", "28.90"},
+            {"BIG BOX CLASSIC", "27.90"}, {"BIG BOX FULL", "34.90"}
+    };
+    String[][] menu_para_dos = {
+            {"COMBO CHICK'N SHARE CLÁSICO", "40.90"}, {"CHICK'N SHARE 18 NUGGETS + 2 PAPAS", "38.00"},
+            {"CHICK'N SHARE MIX 3 PIEZAS + 6 HOT WINGS O NUGGETS + 2 PAPAS", "38.00"}, {"CHICK'N SHARE NUGGETS Y HOT WINGS", "42.90"},
+    };
+
+    public void fDatosCliente() {
+        System.out.println("Ingrese sus Datos Completos");
+        System.out.println("Nombres:");
+        nombre = wali.nextLine();
+        System.out.println("Apellidos:");
+        apellido = wali.nextLine();
+        System.out.println("DNI:");
+        dni = wali.nextLine();
+        this.menuprincipal();
+    }
+
+    public void menuprincipal() {
+        System.out.println("----BIENVENIDO A KFC---");
+        System.out.println("1.- Mega");
+        System.out.println("2.- Sandwiches");
+        System.out.println("3.- Combos");
+        System.out.println("4.- Big Box");
+        System.out.println("5.- Para dos");
+        System.out.println("Ingrese la opción:");
+        String opcion = wali.nextLine();
+
+        switch (opcion) {
+            case "1":
+                despues_de_menu(mega_regulares, wali);
+                break;
+            case "2":
+                despues_de_menu(menu_sandwich, wali);
+                break;
+            case "3":
+                despues_de_menu(combos, wali);
+                break;
+            case "4":
+                despues_de_menu(bigbox, wali);
+                break;
+            case "5":
+                despues_de_menu(menu_para_dos, wali);
+                break;
+            default:
+                System.out.println("Opción no válida");
+        }
+    }
+
+    public void despues_de_menu(String[][] menu, Scanner wali) {
+        System.out.println("----------------------");
+        for (int i = 0; i < menu.length; i++) {
+            System.out.println((i + 1) + ": " + menu[i][0] + " - S/ " + menu[i][1]);
+        }
+        System.out.println("----------------------");
+        System.out.println("Seleccione una opción:");
+        int opcion = wali.nextInt();
+        wali.nextLine();
+
+        if (opcion >= 1 && opcion <= menu.length) {
+            String nombreProducto = menu[opcion - 1][0];
+            double precioProducto = Double.parseDouble(menu[opcion - 1][1]);
+            pedido(precioProducto, nombreProducto, wali);
+        } else {
+            System.out.println("Opción no válida");
+        }
+    }
+
+    public void pedido(double precio, String tipo, Scanner wali) {
+        System.out.println("¿Cuántas órdenes desea llevar?");
+        int cantidad = wali.nextInt();
+        wali.nextLine();
+        double total_pagar = precio * cantidad;
+
+        System.out.println("¿Desea pedir algo más? (SI/NO)");
+        String respuesta = wali.nextLine();
+
+        if (respuesta.equalsIgnoreCase("SI")) {
+            this.menuprincipal();
+
+        } else {
+            totalAcumulado += total_pagar;
+            System.out.println("El total a pagar por este pedido es: " + total_pagar);
+            System.out.println("El total a pagar por todos los pedidos es: " + totalAcumulado);
+            System.out.println("Gracias por su compra. ¡Hasta luego!");
+            System.exit(0);
+            totalAcumulado += total_pagar;
+            System.out.println("El total a pagar por este pedido es: " + total_pagar);
+            System.out.println("desea realizar el pago?");
+            opcion= wali.nextLine();
+            if (opcion.equalsIgnoreCase("si")){
+
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        KEFEC goku = new KEFEC();
+            System.out.println(
+                    "⣿⣿⣿⣿⣿⣿⣿⡿⢟⣋⣭⣥⣭⣭⣍⡉⠉⠙⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⣿⣿⡏⠁⠠⠶⠛⠻⠿⣿⣿⣿⣿⣷⡄⠄⠄⠄⠄⠉⠻⢿⣿⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⣿⠟⠄⢀⡴⢊⣴⣶⣶⣾⣿⣿⣿⣿⢿⡄⠄⠄⠄⠄⠄⠄⠙⢿⣿⣿⣿\n" +
+                            "⣿⣿⡿⠁⠄⠙⡟⠁⣾⣿⣿⣿⣿⣿⣿⣿⣿⣎⠃⠄⠄⠄⠄⠄⠄⠄⠈⢻⣿⣿\n" +
+                            "⣿⡟⠄⠄⠄⠄⡇⠰⠟⠛⠛⠿⠿⠟⢋⢉⠍⢩⣠⡀⠄⠄⠄⠄⠄⠄⠄⠄⢹⣿\n" +
+                            "⣿⠁⠄⠄⠄⠄⠰⠁⣑⣬⣤⡀⣾⣦⣶⣾⣖⣼⣿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⢿\n" +
+                            "⡏⠄⠄⠄⠄⠄⠄⠄⠨⣿⠟⠰⠻⠿⣣⡙⠿⣿⠋⠄⢀⡀⣀⠄⣀⣀⢀⣀⣀⢸\n" +
+                            "⡇⠄⠄⠄⠄⠄⠄⠄⠄⣠⠄⠚⠛⠉⠭⣉⢁⣿⠄⢀⡿⢾⣅⢸⡗⠂⢿⣀⡀⢸\n" +
+                            "⡇⠄⠄⠄⠄⠄⠄⠄⠄⠘⢧⣄⠄⣻⣿⣿⣾⠟⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢸\n" +
+                            "⣿⠄⠄⠄⠄⠄⠄⠄⠄⢠⡀⠄⠄⣿⣿⠟⢁⣴⣿⢸⡄⠄⢦⣤⣤⣤⣤⣄⡀⣼\n" +
+                            "⣿⣧⠄⠄⠄⠄⠄⠄⢠⡸⣿⠒⠄⠈⠛⠄⠁⢹⡟⣾⡇⠄⠈⢿⣿⣿⣿⣿⣿⣿\n" +
+                            "⣿⣿⣧⣠⣴⣦⠄⠄⢸⣷⡹⣧⣖⡔⠄⠱⣮⣻⣷⣿⣿⠄⠄⠘⣿⣿⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⣿⣿⡇⠄⠄⠸⠿⠿⠚⠛⠁⠂⠄⠉⠉⡅⢰⡆⢰⡄⠄⠘ ⣿⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⣿⣿⣷⣤⡀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⠄⣷⠘⣧⣠⣾⣿⣿⣿⣿⣿\n" +
+                            "⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣤⣄⣀⣀⡀⠄⣀⣀⣹⣦⣽⣾⣿⣿⣿⣿⣿⣿⣿⣿");
+        goku.fDatosCliente();
+    }
+}
